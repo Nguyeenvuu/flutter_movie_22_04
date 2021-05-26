@@ -110,7 +110,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                     "${widget.movie.overview}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ],

@@ -68,7 +68,7 @@ class _RatingPageState extends State<RatingPage> {
                     color: Colors.white,
                     onPressed: () => _addRating(rating.toInt())),
                 Container(
-                  height: 400,
+                  height: 300,
                   color: Color(0xFF2d3450),
                   child: BlocBuilder<RatingBloc, RatingState>(
                     builder: (context, state) {
@@ -82,7 +82,8 @@ class _RatingPageState extends State<RatingPage> {
                         );
                       }
                       if (state is RatingLoadedState) {
-                        return ListView(
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Total ratings",
