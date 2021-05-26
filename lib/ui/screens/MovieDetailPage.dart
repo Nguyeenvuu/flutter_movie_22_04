@@ -49,6 +49,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(null),
+            onPressed: () {},
           )
         ],
         backgroundColor: Color(0xFF2d3450),
