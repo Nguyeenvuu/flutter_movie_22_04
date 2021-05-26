@@ -4,6 +4,7 @@ import 'package:movie_app/ui/screens/HomePage.dart';
 import 'package:movie_app/ui/screens/UserInfoPage.dart';
 import 'package:movie_app/ui/screens/SearchPage.dart';
 import 'package:movie_app/ui/screens/homepage_new_user.dart';
+import 'package:movie_app/ui/screens/register/register_screen.dart';
 
 class DrawerNavigationBloc {
   int _indexItemSelected = 0;
@@ -17,7 +18,7 @@ class DrawerNavigationBloc {
 
   List<Map<String, dynamic>> _options = [
     {"icon": Icons.home, "title": "Home Page"},
-    {"icon": Icons.person, "title": "User Information"}
+    {"icon": Icons.person, "title": "User Information"},
   ];
 
   int get indexSelected => _indexItemSelected;

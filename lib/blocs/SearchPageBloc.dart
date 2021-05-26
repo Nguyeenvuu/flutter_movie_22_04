@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/models/Movie.dart';
+import 'package:movie_app/models/User.dart';
 import 'package:movie_app/models/api_model_online.dart';
 import 'package:movie_app/repositories/MovieApiClient.dart';
 import 'package:movie_app/ui/screens/MovieDetailPage.dart';
@@ -31,10 +32,11 @@ class SearchPageBloc {
     return MovieApiClient.loadMovies(list_id);
   }
 
-  void movieItemSelected(BuildContext context, Movie movie, String listName) {
+  void movieItemSelected(
+      BuildContext context, Movie movie, String listName, User user) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MovieDetailPage(movie, listName)));
+            builder: (context) => MovieDetailPage(movie, listName, user)));
   }
 }

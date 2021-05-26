@@ -26,8 +26,21 @@ class _VideoScreenState extends State<VideoScreen> {
       future: MovieApiClient.getYoutubeId(widget.id),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(
-            child: Image.asset("assets/images/backdrop_default.PNG"),
+          // return Center(
+          //   child: Image.asset("assets/images/backdrop_default.PNG"),
+          // );
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.black,
+            ),
+            body: Container(
+              color: Colors.black,
+              child: Center(
+                child: Container(
+                  child: Image.asset("assets/images/backdrop_default.PNG"),
+                ),
+              ),
+            ),
           );
         }
         if (snapshot.hasData) {
@@ -55,11 +68,16 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
           );
         }
-        return Center(
-          child: Container(
-            height: 50,
-            width: 50,
-            child: CircularProgressIndicator(),
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+          ),
+          body: Center(
+            child: Container(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(),
+            ),
           ),
         );
       },

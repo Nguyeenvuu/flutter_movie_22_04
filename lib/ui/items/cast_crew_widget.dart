@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/models/User.dart';
 import 'package:movie_app/models/api_cast_online.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:movie_app/ui/screens/Actor_detail_page.dart';
 
 class CastScreen extends StatelessWidget {
   final List<Cast> casts;
-  CastScreen(this.casts);
+  final User user;
+  CastScreen(this.casts, this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +45,17 @@ class CastScreen extends StatelessWidget {
                 SizedBox(
                   height: 8,
                 ),
-                AutoSizeText(
-                  casts[i].name,
-                  maxLines: 2,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.02,
-                    color: Color(0xFFfbfbfb),
-                  ),
-                )
               ],
             ),
             onTap: () {
-              print("Detail Actor${casts[i].name}");
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ActorDetailPage(
+                    cast: casts[i],
+                    user: user,
+                  ),
+                ),
+              );
             },
           );
         });

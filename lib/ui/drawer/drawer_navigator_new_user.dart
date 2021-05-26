@@ -35,7 +35,7 @@ class HomePageState extends State<DrawerNavigatorNewUser> {
         },
       ));
     }
-
+    double fontsize = 18;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF2d3450),
@@ -56,17 +56,38 @@ class HomePageState extends State<DrawerNavigatorNewUser> {
               ],
       ),
       drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF2d3450)),
-              accountName: Text("${widget.user.name}"),
-              accountEmail: Text("${widget.user.email}"),
-            ),
-            Column(
-              children: drawerOptions,
-            )
-          ],
+        child: Container(
+          color: Color(0xFF2d3450),
+          child: Column(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/fundo.jpg"),
+                        fit: BoxFit.cover)),
+                accountName: Text(
+                  "${widget.user.name}",
+                  style: TextStyle(
+                    fontSize: fontsize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Text(
+                  "${widget.user.email}",
+                  style: TextStyle(
+                    fontSize: fontsize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: ExactAssetImage('assets/images/avatar.jpg'),
+                ),
+              ),
+              Column(
+                children: drawerOptions,
+              )
+            ],
+          ),
         ),
       ),
       body: _bloc.getUINewUser(_bloc.indexSelected),

@@ -10,7 +10,6 @@ class MovieApiClient {
 
   static Future<Movie> fetchMovie(int id) async {
     String url = _baseURL + id.toString() + "?api_key=" + _apiKey;
-
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -72,7 +71,6 @@ class MovieApiClient {
 
   static Future<String> getYoutubeId(int id) async {
     String url = '${_baseURL}$id/videos?api_key=$_apiKey';
-    print(url);
     try {
       final response = await http.get(url);
       var youtubeId = json.decode(response.body)['results'][0]['key'];
@@ -81,5 +79,17 @@ class MovieApiClient {
       throw Exception(
           'Exception accoured: $error with stacktrace: $stacktrace');
     }
+  }
+
+  static Future<Map<String, dynamic>> loadMovieByCast(String castName) async {
+    http.Response response = await http.post(recommendationMoviesByCastUrl,
+        headers: <String, String>{'Content-Type': 'application/json'},
+        body: jsonEncode(<String, dynamic>{
+          "cast_name": castName,
+        }));
+
+    Map<String, dynamic> res_data = json.decode(response.body);
+
+    return res_data;
   }
 }

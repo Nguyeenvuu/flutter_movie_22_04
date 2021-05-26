@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/blocs/DrawerNavigationBloc.dart';
 import 'package:movie_app/models/User.dart';
 import 'package:movie_app/ui/items/DrawerItem.dart';
-import 'package:movie_app/ui/screens/HomePage.dart';
 
 class DrawerNavigation extends StatefulWidget {
   User user;
 
-  DrawerNavigation(this.user);
+  DrawerNavigation({this.user});
 
   @override
   DrawerNavigationState createState() => DrawerNavigationState();
@@ -34,7 +33,7 @@ class DrawerNavigationState extends State<DrawerNavigation> {
         },
       ));
     }
-
+    double fontsize = 18;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF2d3450),
@@ -56,18 +55,38 @@ class DrawerNavigationState extends State<DrawerNavigation> {
               ],
       ),
       drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF2d3450)),
-              accountName: Text("${widget.user.name}"),
-              accountEmail:
-                  Text("${widget.user.email}__ ${widget.user.favorite}"),
-            ),
-            Column(
-              children: drawerOptions,
-            )
-          ],
+        child: Container(
+          color: Color(0xFF2d3450),
+          child: Column(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/fundo.jpg"),
+                        fit: BoxFit.cover)),
+                accountName: Text(
+                  "${widget.user.name}",
+                  style: TextStyle(
+                    fontSize: fontsize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Text(
+                  "${widget.user.email}",
+                  style: TextStyle(
+                    fontSize: fontsize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: ExactAssetImage('assets/images/avatar.jpg'),
+                ),
+              ),
+              Column(
+                children: drawerOptions,
+              ),
+            ],
+          ),
         ),
       ),
       body: _bloc.getUI(_bloc.indexSelected),

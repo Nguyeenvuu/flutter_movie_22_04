@@ -1,5 +1,3 @@
-import 'package:movie_app/models/customer.dart';
-
 class RegisterState {
   final bool isEmailValid;
   final bool isPasswordValid;

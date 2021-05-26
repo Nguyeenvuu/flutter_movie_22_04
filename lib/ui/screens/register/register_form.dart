@@ -5,7 +5,6 @@ import 'package:movie_app/blocs/register_bloc.dart/register_event.dart';
 import 'package:movie_app/blocs/register_bloc.dart/register_state.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/models/genre.dart';
-import 'package:movie_app/ui/widgets/check_favorite.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -503,66 +502,4 @@ class _LoginFormState extends State<RegisterForm> {
 
     return result;
   }
-  // final String stringFavorite = "";
-  // void _modalBottomSheetMenu() {
-  //   bool val = false;
-  //   showModalBottomSheet(
-  //       context: context,
-  //       builder: (builder) {
-  //         return new Container(
-  //           height: 350.0,
-  //           color: Colors.transparent, //could change this to Color(0xFF737373),
-  //           //so you don't have to change MaterialApp canvasColor
-  //           child: Column(
-  //             children: [
-  //               CheckboxListTile(
-  //                 controlAffinity: ListTileControlAffinity.leading,
-  //                 title: Text('I am true now'),
-  //                 value: genres.action,
-  //                 onChanged: (value) {
-  //                   setState(() {
-  //                     genres.action = !genres.action;
-  //                   });
-  //                 },
-  //               ),
-  //               IconButton(
-  //                 icon: Icon(Icons.home),
-  //                 onPressed: () {
-  //                   var list = [];
-  //                   if (genres.action == true) {
-  //                     list.add("abc");
-  //                   }
-
-  //                   stringFavorite = list.toString();
-  //                   print(stringFavorite);
-  //                 },
-  //               )
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
-
-  // Widget _submitButton(state) {
-  //   return InkWell(
-  //     onTap: () {
-  //       if (isButtonEnabled(state)) {
-  //         _onFormSubmitted();
-  //       }
-  //     },
-  //     child: Container(
-  //       width: MediaQuery.of(context).size.width,
-  //       padding: EdgeInsets.symmetric(vertical: 5),
-  //       alignment: Alignment.center,
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.all(Radius.circular(25)),
-  //         border: Border.all(color: Colors.blue, width: 2),
-  //       ),
-  //       child: Text(
-  //         'Register',
-  //         style: TextStyle(fontSize: 20, color: Colors.blue),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

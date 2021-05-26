@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/blocs/MovieDetailPageBloc.dart';
+import 'package:movie_app/blocs/HomePageBloc.dart';
 import 'package:movie_app/models/Movie.dart';
+import 'package:movie_app/models/User.dart';
 import 'package:movie_app/repositories/cast_and_crew_repository.dart';
+import 'package:movie_app/ui/widgets/related_movie_widget.dart';
 import 'package:movie_app/ui/widgets/tabview_movie_widget.dart';
 import 'package:movie_app/utils/Sizes.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieDetailPage extends StatefulWidget {
   Movie _movie;
   String _listName;
+  User _user;
 
-  MovieDetailPage(this._movie, this._listName);
+  MovieDetailPage(this._movie, this._listName, this._user);
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  HomePageBloc bloc = new HomePageBloc();
+  Future<Map<String, dynamic>> res_data;
+  Future<List<int>> _recommended_movies;
+
   String _base_url = "https://image.tmdb.org/t/p/";
-
   double _backdrop_width = DeviceSize.getWidth();
-
   double _poster_width = DeviceSize.getWidth() / 4;
 
-  MovieDetailPageBloc bloc = new MovieDetailPageBloc();
+  // MovieDetailPageBloc bloc = new MovieDetailPageBloc();
 
   TabController tabController;
   @override
@@ -35,6 +41,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     // TODO: implement build
     final double sizeTextHeader = 14;
     CastAndCrewRepository _castrepository = new CastAndCrewRepository();
+    print("DetailPage: build Function!");
+    res_data = bloc.loadRecommendedMoviesNewUser(
+        widget._user.userId, widget._user.favorite);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -134,7 +143,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         Container(
                           margin: EdgeInsets.only(left: 10),
                           width: _backdrop_width * (1 - 1 / 4) - 20,
-                          height: _poster_width * 1.5 / 1.8,
+                          height: _poster_width * 1.5 / 1.9,
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -154,7 +163,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "${this.widget._movie.voteAverage}",
+                                      "${this.widget._movie.voteAverage / 2}",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -163,24 +172,26 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: 30,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Released: " +
-                                          this.widget._movie.releaseDate,
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                    RatingBar.builder(
+                                      initialRating:
+                                          this.widget._movie.voteAverage / 2,
+                                      ignoreGestures: true,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemSize: 30.0,
+                                      itemCount: 5,
+                                      itemPadding:
+                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                        size: 10,
+                                      ),
+                                      onRatingUpdate: (_) {},
                                     ),
                                   ],
-                                ),
+                                )
                               ],
                             ),
                           ),
@@ -190,7 +201,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   ],
                 ),
               ),
-
               Column(
                 children: [
                   Container(
@@ -199,108 +209,18 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     width: double.infinity,
                     child: TabViewMovie(
                       movie: widget._movie,
+                      user: widget._user,
                     ),
                   ),
                 ],
-              )
-
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   children: [
-              //     Expanded(
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.all(Radius.circular(25)),
-              //             border: Border.all(color: Colors.white, width: 0.5)),
-              //         child: FlatButton(
-              //           child: Text(
-              //             "Details",
-              //             style: TextStyle(
-              //               fontSize: sizeTextHeader,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           onPressed: () {
-              //             print("Pressed Details");
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //     Expanded(
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.all(Radius.circular(25)),
-              //             border: Border.all(color: Colors.white, width: 0.5)),
-              //         child: FlatButton(
-              //           child: Text(
-              //             "Comments",
-              //             style: TextStyle(
-              //               fontSize: sizeTextHeader,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           onPressed: () {
-              //             print("Pressed Comment");
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //     Expanded(
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.all(Radius.circular(25)),
-              //             border: Border.all(color: Colors.white, width: 0.5)),
-              //         child: FlatButton(
-              //           child: Text(
-              //             "Ratings",
-              //             style: TextStyle(
-              //               fontSize: sizeTextHeader,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           onPressed: () {
-              //             print("pressed Rating");
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //     Expanded(
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.all(Radius.circular(25)),
-              //             border: Border.all(color: Colors.white, width: 0.5)),
-              //         child: FlatButton(
-              //           child: Text(
-              //             "Related",
-              //             style: TextStyle(
-              //               fontSize: sizeTextHeader,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           onPressed: () {
-              //             print("pressed Related");
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              ),
+              RelatedMovie(widget._user, widget._movie),
             ],
           ),
         ),
       ),
     );
   }
-
-  final List<Tab> myTabs = <Tab>[
-    const Tab(text: 'Comments'),
-    const Tab(text: 'Ratings'),
-    const Tab(text: 'Ratings'),
-  ];
 
   String convertString(dynamic genres) {
     String result = "";
@@ -325,47 +245,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 text: title, style: TextStyle(fontWeight: FontWeight.bold)),
             TextSpan(text: detail)
           ]),
-    );
-  }
-
-  Widget createRatingBar() {
-    return StreamBuilder(
-      stream: bloc.ratingBarStream,
-      builder: (context, snapshot) {
-        return Column(
-          children: <Widget>[
-            Divider(
-              color: Colors.white,
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5),
-              child: Center(
-                child: Text(
-                  "Rating for this movie",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(5, (index) {
-                return IconButton(
-                  onPressed: () {
-                    bloc.iconButtonPress(index + 1);
-                  },
-                  color: Colors.yellow,
-                  iconSize: 30,
-                  icon: Icon(
-                      index < snapshot.data ? Icons.star : Icons.star_border),
-                );
-              }),
-            ),
-          ],
-        );
-      },
     );
   }
 }

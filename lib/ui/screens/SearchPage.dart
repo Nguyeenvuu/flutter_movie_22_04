@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/blocs/LoginPageBloc.dart';
 import 'package:movie_app/blocs/SearchPageBloc.dart';
 import 'package:movie_app/models/Movie.dart';
+import 'package:movie_app/models/User.dart';
 import 'package:movie_app/ui/items/MovieItem.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends SearchDelegate {
   SearchPageBloc _bloc = new SearchPageBloc();
 
+  SearchPage();
   @override
   List<Widget> buildActions(BuildContext context) {
     // TODO: implement buildActions
@@ -33,7 +37,9 @@ class SearchPage extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    if (query.length < 3){
+    User user = Provider.of<LoginPageBloc>(context, listen: false).user;
+    print(user.name);
+    if (query.length < 3) {
       return Container(
         color: Color(0xFF2d3450),
         child: Center(
@@ -53,34 +59,32 @@ class SearchPage extends SearchDelegate {
       color: Color(0xFF2d3450),
       child: FutureBuilder(
         future: listMovieId,
-        builder: (context, snapshot){
-          if (!snapshot.hasData){
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          }
-          else if (snapshot.data.length == 0){
+          } else if (snapshot.data.length == 0) {
             return Center(
               child: Text(
                 'No Results Found.',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20
-                ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             );
-          }
-          else {
+          } else {
             List<Future<Movie>> movies = _bloc.loadMovies(snapshot.data);
             return ListView.builder(
               cacheExtent: 0.0,
               itemCount: movies.length,
-              itemBuilder: (context, index){
+              itemBuilder: (context, index) {
                 return GestureDetector(
-                  child: MovieItemForMore(movies[index],"more_page"),
-                  onTap: () async{
-                    _bloc.movieItemSelected(context, await movies[index], "more_page");
+                  child: MovieItemForMore(movies[index], "more_page"),
+                  onTap: () async {
+                    _bloc.movieItemSelected(
+                        context, await movies[index], "more_page", user);
                   },
                 );
               },
@@ -93,8 +97,25 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    User user = Provider.of<LoginPageBloc>(context, listen: false).user;
     // TODO: implement buildSuggestions
-    return Column();
+    List<Future<Movie>> movies = _bloc.loadMovies([299534, 76600]);
+    return Container(
+      color: Color(0xFF2d3450),
+      child: ListView.builder(
+        cacheExtent: 0.0,
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            child: MovieItemForMore(movies[index], "more_page"),
+            onTap: () async {
+              _bloc.movieItemSelected(
+                  context, await movies[index], "more_page", user);
+            },
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -103,11 +124,8 @@ class SearchPage extends SearchDelegate {
     return theme.copyWith(
       primaryColor: Color(0xFF2d3450),
       primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.white),
-      textTheme: theme.textTheme.apply(
-        bodyColor: Colors.white,
-        displayColor: Colors.white
-      ),
-
+      textTheme: theme.textTheme
+          .apply(bodyColor: Colors.white, displayColor: Colors.white),
     );
   }
 }

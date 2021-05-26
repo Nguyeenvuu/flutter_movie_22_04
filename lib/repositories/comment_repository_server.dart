@@ -9,11 +9,9 @@ class CommentRepositoryServer {
 
   Future<List<Comment>> listCommentByUserId({int userId}) async {
     List<Comment> listComent = List<Comment>();
-    print(commentByCustomerUrl);
+
     http.Response response = await http.get(commentByCustomerUrl + '$userId');
     List resData = json.decode(response.body);
-    print(response.statusCode);
-    print("hi");
 
     if (response.statusCode == 200) {
       resData.forEach((comment) {
@@ -31,10 +29,8 @@ class CommentRepositoryServer {
             timeStamp: timeStamp);
         listComent.add(newComment);
       });
-      print(listComent);
       return listComent;
     } else {
-      print(response.statusCode);
       return List<Comment>();
     }
   }
@@ -42,9 +38,10 @@ class CommentRepositoryServer {
   // ignore: missing_return
   Future<List<Comment>> listCommentByMovieId({dynamic movieId}) async {
     List<Comment> listComent = List<Comment>();
-    print(commentByMovieUrl);
+    String url = "$commentByMovieUrl$movieId";
+
     try {
-      http.Response response = await http.get(commentByMovieUrl + '$movieId');
+      http.Response response = await http.get(url);
       List resData = json.decode(response.body);
 
       if (response.statusCode == 200) {
@@ -78,8 +75,6 @@ class CommentRepositoryServer {
     int movieId,
     String content,
   }) async {
-    print(createCommentUrl);
-
     http.Response response = await http.post(
       createCommentUrl,
       headers: <String, String>{'Content-Type': 'application/json'},

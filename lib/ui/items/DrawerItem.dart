@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DrawerItem extends StatelessWidget{
+class DrawerItem extends StatelessWidget {
   Color _colorDark = Color(0xFF2d3447);
   IconData _icon;
   String _title;
   bool _selected;
-
 
   DrawerItem(this._icon, this._title, this._selected);
 
@@ -14,9 +13,9 @@ class DrawerItem extends StatelessWidget{
     // TODO: implement build
     return Container(
       height: 50,
-      decoration: BoxDecoration(
-        color: (_selected) ? _colorDark : null,
-      ),
+      // decoration: BoxDecoration(
+      //   color: (_selected) ? _colorDark : null,
+      // ),
       child: Row(
         children: <Widget>[
           Container(
@@ -25,7 +24,7 @@ class DrawerItem extends StatelessWidget{
             child: Icon(
               _icon,
               size: 30,
-              color: (_selected) ? Colors.white : _colorDark,
+              color: Colors.white,
             ),
           ),
           Padding(
@@ -33,14 +32,13 @@ class DrawerItem extends StatelessWidget{
             child: Text(
               _title,
               style: TextStyle(
-                fontSize: 16,
-                color: (_selected) ? Colors.white : _colorDark,
-              ),
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
-          )
+          ),
         ],
       ),
     );
   }
-
 }

@@ -127,7 +127,10 @@ class MovieItemForMore extends StatelessWidget {
                               fontSize: 22,
                               fontWeight: FontWeight.bold),
                         ),
-                        createText("Release: " + snapshot.data.releaseDate),
+                        snapshot.data.releaseDate != ""
+                            ? createText(
+                                "Release: " + snapshot.data.releaseDate)
+                            : createText("Release: Updating"),
                         createGenres(snapshot.data.genres),
                         Row(
                           children: <Widget>[
@@ -174,6 +177,9 @@ class MovieItemForMore extends StatelessWidget {
   }
 
   Widget createGenres(List<dynamic> genres) {
+    if (genres.length == 0) {
+      return Container();
+    }
     if (genres.length > 0) {
       List<Widget> someWidget = [];
       for (int i = 0; i < genres.length; i++) {

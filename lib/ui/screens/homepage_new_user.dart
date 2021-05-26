@@ -90,7 +90,7 @@ class HomePageState extends State<HomePageNewUser> {
             child: MovieItem(list_movies[index], listName),
             onTap: () async {
               bloc.movieItemSelected(
-                  context, await list_movies[index], listName);
+                  context, await list_movies[index], listName, widget.user);
             },
           );
         },
@@ -112,7 +112,8 @@ class HomePageState extends State<HomePageNewUser> {
           return GestureDetector(
             child: PageViewHeaderItem(list_movies[index]),
             onTap: () async {
-              bloc.movieItemSelected(context, await list_movies[index], "");
+              bloc.movieItemSelected(
+                  context, await list_movies[index], "", widget.user);
             },
           );
         },
@@ -144,7 +145,7 @@ class HomePageState extends State<HomePageNewUser> {
         ),
         GestureDetector(
           onTap: () {
-            bloc.buttonMoreTap(context, title, movies);
+            bloc.buttonMoreTap(context, title, movies, widget.user);
           },
           child: Padding(
             padding: EdgeInsets.only(top: 10, left: 5, right: 5),

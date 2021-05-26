@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/repositories/UserApiClient.dart';
-import 'package:movie_app/ui/drawer/DrawerNavigation.dart';
-import 'package:movie_app/ui/screens/HomePage.dart';
+
 import 'package:movie_app/models/User.dart';
 
-class LoginPageBloc {
+class LoginPageBloc with ChangeNotifier {
   TextEditingController userController = new TextEditingController();
   TextEditingController passController = new TextEditingController();
 
-  String _username = "admin";
-  String _password = "123456";
+  User _user;
+
+  User get user {
+    return _user;
+  }
 
   Future btnLoginPress(BuildContext context) async {
     Map<String, dynamic> res_data =
         await UserApiClient.Login(userController.text, passController.text);
+    _user = User.fromJson(res_data);
+    print(user.name);
+    print(user.userId);
     if (res_data['Sign In Success']) {
 //      Navigator.of(context).pop();
       if (res_data["user_id"] <= 270896) {
-        print(res_data);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DrawerNavigation(User.fromJson(res_data))));
+        Navigator.of(context).pushReplacementNamed(
+          "/DrawerNavigation",
+          arguments: _user,
+        );
       } else {
-        Navigator.of(context).pushNamed("/DrawerNavigatorNewUser",
-            arguments: User.fromJson(res_data));
+        Navigator.of(context).pushReplacementNamed(
+          "/DrawerNavigatorNewUser",
+          arguments: _user,
+        );
       }
     }
 //    if (userController.text == _username && passController.text == _password){

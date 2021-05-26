@@ -10,10 +10,8 @@ class UserApiClient {
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(
             <String, String>{'user_name': userName, 'password': password}));
-    print(customerLoginUrl);
     try {
       Map<String, dynamic> resData = json.decode(response.body);
-      print(resData);
       return resData;
     } catch (e) {
       print(e);

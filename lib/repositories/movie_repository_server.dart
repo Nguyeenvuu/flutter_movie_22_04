@@ -11,10 +11,8 @@ class MovieRepositoryServer {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print('Status code: ${response.statusCode}');
       return Movie.fromJson(json.decode(response.body));
     } else {
-      print('Status code: ${response.statusCode}');
       return null;
     }
   }

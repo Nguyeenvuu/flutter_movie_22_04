@@ -8,30 +8,16 @@ import 'package:movie_app/utils/url_base.dart';
 class RatingRepositoryServer {
   static http.Client httpClient = http.Client();
 
-  Future<List<Rating>> listRatingByMovieId(String movieId) async {
-    List<Rating> listRating = List<Rating>();
-    String url = baseServerUrl + ratingByMovieIdUrl + '$movieId';
-    print(url);
+  Future<Map<String, dynamic>> listRatingByMovieId(String movieId) async {
+    String url = ratingByMovieIdUrl + '$movieId';
     try {
       http.Response response = await http.get(url);
-      List resData = json.decode(response.body);
+      Map<String, dynamic> resData = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        resData.forEach((rating) {
-          int userid = rating['user'];
-          int movieid = rating['movie'];
-          double rt = rating['rating'];
-          var timeStamp = rating['time_rating'];
-          Rating newComment = Rating(
-              userId: userid,
-              movieId: movieid,
-              rating: rt,
-              timeRating: timeStamp);
-          listRating.add(newComment);
-        });
-        return listRating;
+        return resData;
       } else {
-        return List<Rating>();
+        return Map<String, dynamic>();
       }
     } catch (e) {
       print(e);
@@ -41,7 +27,6 @@ class RatingRepositoryServer {
   Future<List<Rating>> listRatingByUserId(int userId) async {
     List<Rating> listRating = List<Rating>();
     String url = baseServerUrl + ratingByUserIdUrl + '$userId';
-    print(url);
     http.Response response = await http.get(url);
     List resData = json.decode(response.body);
 
@@ -71,8 +56,6 @@ class RatingRepositoryServer {
     int movieId,
     int rating,
   }) async {
-    print(ratingCreateUrl);
-
     http.Response response = await http.post(
       ratingCreateUrl,
       headers: <String, String>{'Content-Type': 'application/json'},
@@ -95,4 +78,25 @@ class RatingRepositoryServer {
   //     "movie_id": 14
   // }
 
+  Future<Map<String, dynamic>> updateRating({
+    int userId,
+    int movieId,
+    int rating,
+  }) async {
+    http.Response response = await http.put(
+      ratingCreateUrl,
+      headers: <String, String>{'Content-Type': 'application/json'},
+      body: jsonEncode(
+        <String, int>{
+          'user_id': userId,
+          'rating': rating,
+          'movie_id': movieId,
+        },
+      ),
+    );
+
+    Map<String, dynamic> resData = json.decode(response.body);
+
+    return resData;
+  }
 }

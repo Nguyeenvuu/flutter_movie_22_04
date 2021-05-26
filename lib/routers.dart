@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/repositories/user_repository_server.dart';
+import 'package:movie_app/ui/drawer/DrawerNavigation.dart';
 import 'package:movie_app/ui/drawer/drawer_navigator_new_user.dart';
+
 import 'package:movie_app/ui/screens/LoginPage.dart';
-import 'package:movie_app/ui/screens/TestScreen.dart';
+
 import 'package:movie_app/ui/screens/homepage_new_user.dart';
 import 'package:movie_app/ui/screens/register/register_screen.dart';
 import 'package:movie_app/ui/welcome_page.dart';
@@ -27,22 +29,20 @@ class RouteGenerator {
             userRepository: _userRepository,
           ),
         );
-      case '/Test':
-        return MaterialPageRoute(
-            builder: (_) => TestWidget(
-                  title: args,
-                ));
       case '/DrawerNavigatorNewUser':
         return MaterialPageRoute(
             builder: (_) => DrawerNavigatorNewUser(user: args));
+      case '/DrawerNavigation':
+        return MaterialPageRoute(builder: (_) => DrawerNavigation(user: args));
       case '/HomePageNewUser':
         return MaterialPageRoute(builder: (_) => HomePageNewUser(user: args));
 
       case '/videoTrailer':
         return MaterialPageRoute(
-            builder: (_) => VideoScreen(
-                  id: args,
-                ));
+          builder: (_) => VideoScreen(
+            id: args,
+          ),
+        );
       case '/CommentPage':
         return MaterialPageRoute(builder: (_) => CommentPage());
       default:

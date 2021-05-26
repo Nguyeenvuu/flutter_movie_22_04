@@ -12,10 +12,8 @@ class UserRepositoryServer {
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(
             <String, String>{'user_name': userName, 'password': password}));
-    print(customerLoginUrl);
     try {
       Map<String, dynamic> resData = json.decode(response.body);
-      print(resData);
       return resData;
     } catch (e) {
       print(e);
@@ -32,7 +30,6 @@ class UserRepositoryServer {
       String birthday,
       String gender,
       String favorite}) async {
-    print(customerRegisterUrl);
     http.Response response = await http.post(
       customerRegisterUrl,
       headers: <String, String>{'Content-Type': 'application/json'},
@@ -65,16 +62,14 @@ class UserRepositoryServer {
   // print('${user1.keys}: ${user1.values}');
 
 //===============================================================
-  Future<User> getUSerById({int userId}) async {
+  static Future<String> getUSerById({int userId}) async {
     http.Response response = await http.post(customerDetailUrl,
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(<String, int>{'user_id': userId}));
-    print(customerDetailUrl);
     try {
       Map<String, dynamic> resData = json.decode(response.body);
       User user = User.fromJson(resData);
-      print(resData);
-      return user;
+      return user.name;
     } catch (e) {
       print(e);
     }

@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/Movie.dart';
+import 'package:movie_app/models/User.dart';
 import 'package:movie_app/ui/items/MovieItem.dart';
 import 'package:movie_app/blocs/HomePageBloc.dart';
 
-class MoreMoviesPage extends StatefulWidget{
+class MoreMoviesPage extends StatefulWidget {
   String _title;
   List<int> _movies;
-
-  MoreMoviesPage(this._title, this._movies);
+  User _user;
+  MoreMoviesPage(this._title, this._movies, this._user);
 
   @override
   MoreMoviesPageState createState() => MoreMoviesPageState();
 }
 
-class MoreMoviesPageState extends State<MoreMoviesPage>{
+class MoreMoviesPageState extends State<MoreMoviesPage> {
   HomePageBloc _bloc = new HomePageBloc();
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,18 @@ class MoreMoviesPageState extends State<MoreMoviesPage>{
 
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[IconButton(icon: Icon(null))],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(null),
+            onPressed: () {},
+          )
+        ],
         backgroundColor: Color(0xFF2d3450),
         title: Center(
           child: Text(
             widget._title,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ),
@@ -39,11 +46,12 @@ class MoreMoviesPageState extends State<MoreMoviesPage>{
         child: ListView.builder(
           cacheExtent: 0.0,
           itemCount: movies.length,
-          itemBuilder: (context, index){
+          itemBuilder: (context, index) {
             return GestureDetector(
-              child: MovieItemForMore(movies[index],"more_page"),
-              onTap: () async{
-                _bloc.movieItemSelected(context, await movies[index], "more_page");
+              child: MovieItemForMore(movies[index], "more_page"),
+              onTap: () async {
+                _bloc.movieItemSelected(
+                    context, await movies[index], "more_page", widget._user);
               },
             );
           },
@@ -52,5 +60,4 @@ class MoreMoviesPageState extends State<MoreMoviesPage>{
       ),
     );
   }
-
 }

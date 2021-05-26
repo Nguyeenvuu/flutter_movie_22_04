@@ -2,21 +2,22 @@ import 'dart:async';
 
 class MovieDetailPageBloc {
   StreamController _ratingBarController = new StreamController();
-  int _rating = 0;
+  final int rating;
+  int _value = 0;
 
-  MovieDetailPageBloc(){
-    _ratingBarController.sink.add(_rating);
+  MovieDetailPageBloc({this.rating}) {
+    _ratingBarController.sink.add(rating);
   }
 
   Stream get ratingBarStream => _ratingBarController.stream;
 
-  void iconButtonPress(int value){
-    _rating = value;
-    _ratingBarController.sink.add(_rating);
+  void iconButtonPress(int value) {
+    _value = value;
+    _ratingBarController.sink.add(_value);
     // Gọi api, thêm hoặc sửa dữ liệu vào bảng ratings database
   }
 
-  void dispose(){
+  void dispose() {
     _ratingBarController.close();
   }
 }
