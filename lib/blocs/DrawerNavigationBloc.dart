@@ -4,7 +4,6 @@ import 'package:movie_app/ui/screens/HomePage.dart';
 import 'package:movie_app/ui/screens/UserInfoPage.dart';
 import 'package:movie_app/ui/screens/SearchPage.dart';
 import 'package:movie_app/ui/screens/homepage_new_user.dart';
-import 'package:movie_app/ui/screens/register/register_screen.dart';
 
 class DrawerNavigationBloc {
   int _indexItemSelected = 0;
@@ -30,7 +29,7 @@ class DrawerNavigationBloc {
   }
 
   void showSearchPage(BuildContext context) {
-    showSearch(context: context, delegate: SearchPage());
+    showSearch(context: context, delegate: SearchPage(user: _user));
   }
 
   Widget getUI(int index) {

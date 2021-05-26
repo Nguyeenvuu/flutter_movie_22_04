@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 
 class SearchPage extends SearchDelegate {
   SearchPageBloc _bloc = new SearchPageBloc();
+  final User user;
 
-  SearchPage();
+  SearchPage({this.user});
   @override
   List<Widget> buildActions(BuildContext context) {
     // TODO: implement buildActions
@@ -37,8 +38,8 @@ class SearchPage extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    User user = Provider.of<LoginPageBloc>(context, listen: false).user;
-    print(user.name);
+    // User user = Provider.of<LoginPageBloc>(context, listen: false).user;
+    // print(user.name);
     if (query.length < 3) {
       return Container(
         color: Color(0xFF2d3450),
@@ -97,7 +98,7 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    User user = Provider.of<LoginPageBloc>(context, listen: false).user;
+    // User user = Provider.of<LoginPageBloc>(context, listen: false).user;
     // TODO: implement buildSuggestions
     List<Future<Movie>> movies = _bloc.loadMovies([299534, 76600]);
     return Container(
