@@ -49,4 +49,12 @@ class HomePageBloc {
         await MovieApiClient.loadMovieByCast(castName);
     return res_data;
   }
+
+  Future<Map<String, dynamic>> loadRecommendedMoviesByGenres(
+      {int userId, String favorites}) async {
+    // ignore: non_constant_identifier_names
+    Map<String, dynamic> res_data =
+        await MovieApiClient.loadRecommendedMoviesNewUSer(userId, favorites);
+    return res_data;
+  }
 }

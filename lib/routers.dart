@@ -4,6 +4,7 @@ import 'package:movie_app/ui/drawer/DrawerNavigation.dart';
 import 'package:movie_app/ui/drawer/drawer_navigator_new_user.dart';
 
 import 'package:movie_app/ui/screens/LoginPage.dart';
+import 'package:movie_app/ui/screens/genres_page.dart';
 
 import 'package:movie_app/ui/screens/homepage_new_user.dart';
 import 'package:movie_app/ui/screens/register/register_screen.dart';
@@ -45,6 +46,8 @@ class RouteGenerator {
         );
       case '/CommentPage':
         return MaterialPageRoute(builder: (_) => CommentPage());
+      case '/GenresPage':
+        return MaterialPageRoute(builder: (_) => GenresPage());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

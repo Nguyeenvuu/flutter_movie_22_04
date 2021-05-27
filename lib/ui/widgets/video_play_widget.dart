@@ -14,12 +14,6 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
-  YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId: 'fRRCRVoMjWI', // id youtube video
-      flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-      ));
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

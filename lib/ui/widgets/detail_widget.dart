@@ -8,6 +8,7 @@ import 'package:movie_app/models/User.dart';
 import 'package:movie_app/ui/items/cast_crew_widget.dart';
 import 'package:movie_app/models/Movie.dart';
 import 'package:movie_app/repositories/cast_and_crew_repository.dart';
+import 'package:movie_app/ui/screens/genres_page.dart';
 
 class DetailWidget extends StatefulWidget {
   User user;
@@ -128,23 +129,37 @@ class _DetailWidgetState extends State<DetailWidget> {
       for (int i = 0; i < genres.length; i++) {
         Widget object = Padding(
           padding: EdgeInsets.only(right: 5, top: 5),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            margin: EdgeInsets.symmetric(horizontal: 2),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Color.fromRGBO(254, 160, 2, 1.0),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-              child: Text(
-                genres[i]['name'].toString(),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+          child: GestureDetector(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              margin: EdgeInsets.symmetric(horizontal: 2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Color.fromRGBO(254, 160, 2, 1.0),
+              ),
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                child: Text(
+                  genres[i]['name'].toString(),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
+            onTap: () {
+              print(genres[i]['name'].toString());
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => GenresPage(
+                    genres: genres[i]['name'].toString(),
+                    user: widget.user,
+                  ),
+                ),
+              );
+            },
           ),
         );
         someWidget.add(object);
