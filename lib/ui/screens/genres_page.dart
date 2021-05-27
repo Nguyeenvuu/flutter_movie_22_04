@@ -96,4 +96,10 @@ class _GenresPageState extends State<GenresPage> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }

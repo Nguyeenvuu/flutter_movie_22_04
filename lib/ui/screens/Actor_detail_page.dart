@@ -114,4 +114,10 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }
