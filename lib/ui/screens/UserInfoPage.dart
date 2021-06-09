@@ -197,6 +197,24 @@ class UserInfoPage extends StatelessWidget {
                               )),
                         )
                       ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Icon(
+                          Icons.favorite,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Favorite genres: " + _user.favorite,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: fontsize,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
                     )
                   ],
                 ),

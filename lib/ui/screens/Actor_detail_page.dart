@@ -41,21 +41,21 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
             SizedBox(
               height: 7,
             ),
-            Container(
-              height: MediaQuery.of(context).size.width * 0.4,
-              width: MediaQuery.of(context).size.width * 0.35,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0),
-                  image: DecorationImage(
-                      image: widget.cast.profilePath != null
-                          ? NetworkImage(
-                              "https://image.tmdb.org/t/p/w1280${widget.cast.profilePath}",
-                            )
-                          : AssetImage("assets/images/default_poster.jpg"),
-                      fit: BoxFit.cover),
-                  color: Colors.white),
-            ),
-            TitleOfList("Movie of cast"),
+            // Container(
+            //   height: MediaQuery.of(context).size.width * 0.4,
+            //   width: MediaQuery.of(context).size.width * 0.35,
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(0),
+            //       image: DecorationImage(
+            //           image: widget.cast.profilePath != null
+            //               ? NetworkImage(
+            //                   "https://image.tmdb.org/t/p/w1280${widget.cast.profilePath}",
+            //                 )
+            //               : AssetImage("assets/images/default_poster.jpg"),
+            //           fit: BoxFit.cover),
+            //       color: Colors.white),
+            // ),
+            // TitleOfList("Movie of cast"),
             Expanded(
               child: FutureBuilder<Map<String, dynamic>>(
                   future: this.res_data,
