@@ -59,7 +59,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                           } else if (state is CastLoadingState) {
                             return CircularProgressIndicator();
                           } else if (state is CastLoadedState) {
-                            return CastScreen(state.casts, widget.user);
+                            return CastScreen(
+                                state.casts.sublist(0, 10), widget.user);
                           } else if (state is CastErrorState) {
                             return Center(child: Text("Feild to load !"));
                           }
