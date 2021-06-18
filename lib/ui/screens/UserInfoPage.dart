@@ -11,6 +11,8 @@ class UserInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     double fontsize = 18;
+    List<dynamic> listGenres = convertGenres(_user.favorite);
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -198,23 +200,26 @@ class UserInfoPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Icon(
-                          Icons.favorite,
-                          color: Colors.white,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Favorite genres: " + _user.favorite,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: fontsize,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        )
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            "  Favorite genres: ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontsize,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          createGenres(listGenres),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -224,5 +229,47 @@ class UserInfoPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<dynamic> convertGenres(String genres) {
+    List<dynamic> listRedult = genres.split("|");
+
+    return listRedult;
+  }
+
+  Widget createGenres(List<dynamic> genres) {
+    if (genres.length == 0) {
+      return Container();
+    }
+    if (genres.length > 0) {
+      List<Widget> someWidget = [];
+      for (int i = 0; i < genres.length; i++) {
+        Widget object = Padding(
+          padding: EdgeInsets.only(right: 5, top: 5),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromRGBO(254, 160, 2, 1.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 5, left: 8, right: 8),
+              child: Text(
+                genres[i].toString(),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        );
+        someWidget.add(object);
+      }
+
+      return Wrap(
+        children: someWidget,
+      );
+    }
+    return null;
   }
 }

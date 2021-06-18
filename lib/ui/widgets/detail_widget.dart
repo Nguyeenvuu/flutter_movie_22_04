@@ -73,7 +73,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                                       return CircularProgressIndicator();
                                     } else if (state is CastLoadedState) {
                                       return CastScreen(
-                                          state.casts.sublist(0, 10),
+                                          state.casts.length > 10
+                                              ? state.casts.sublist(0, 10)
+                                              : state.casts,
                                           widget.user);
                                     } else if (state is CastErrorState) {
                                       return Center(
@@ -89,6 +91,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                         ),
                       ],
                     ),
+                  ),
+                  Divider(
+                    height: 2,
+                    color: Colors.white,
                   ),
                   createGenres(widget.movie.genres),
                   createText("Released: ", "${widget.movie.releaseDate}"),
@@ -117,6 +123,13 @@ class _DetailWidgetState extends State<DetailWidget> {
                       color: Colors.white,
                       fontSize: 16,
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    height: 2,
+                    color: Colors.white,
                   ),
                   RelatedMovie(widget.user, widget.movie),
                 ],

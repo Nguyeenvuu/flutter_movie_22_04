@@ -101,7 +101,7 @@ class RelatedMovieState extends State<RelatedMovie> {
           child: Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
           ),
         ),
         GestureDetector(
@@ -116,7 +116,7 @@ class RelatedMovieState extends State<RelatedMovie> {
                   "More",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 20,
                       color: Colors.white),
                 ),
                 Icon(

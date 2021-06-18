@@ -228,7 +228,7 @@ class _LoginFormState extends State<RegisterForm> {
                                 hoverColor: Colors.pink,
                               ),
                               Text(_selectedDate == null
-                                  ? "No date choosed"
+                                  ? ""
                                   : DateFormat.yMMMd().format(_selectedDate)),
                             ],
                           ),
@@ -257,18 +257,6 @@ class _LoginFormState extends State<RegisterForm> {
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Row(
                                     children: [
-                                      Text("Action   "),
-                                      Checkbox(
-                                        value: genres.action,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            genres.action = !genres.action;
-                                          });
-                                        },
-                                      ),
-                                      Expanded(
-                                        child: Text(""),
-                                      ),
                                       Text("Adventure"),
                                       Checkbox(
                                         value: genres.adventure,
@@ -279,6 +267,18 @@ class _LoginFormState extends State<RegisterForm> {
                                           });
                                         },
                                       ),
+                                      Expanded(
+                                        child: Text(""),
+                                      ),
+                                      Text("Action"),
+                                      Checkbox(
+                                        value: genres.action,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            genres.action = !genres.action;
+                                          });
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -286,7 +286,7 @@ class _LoginFormState extends State<RegisterForm> {
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Row(
                                     children: [
-                                      Text("Comedy"),
+                                      Text("Comedy   "),
                                       Checkbox(
                                         value: genres.comedy,
                                         onChanged: (value) {
@@ -314,12 +314,12 @@ class _LoginFormState extends State<RegisterForm> {
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Row(
                                     children: [
-                                      Text("Drama   "),
+                                      Text("Romance "),
                                       Checkbox(
-                                        value: genres.drama,
+                                        value: genres.romance,
                                         onChanged: (value) {
                                           setState(() {
-                                            genres.drama = !genres.drama;
+                                            genres.romance = !genres.romance;
                                           });
                                         },
                                       ),
@@ -342,18 +342,6 @@ class _LoginFormState extends State<RegisterForm> {
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Row(
                                     children: [
-                                      Text("War        "),
-                                      Checkbox(
-                                        value: genres.war,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            genres.war = !genres.war;
-                                          });
-                                        },
-                                      ),
-                                      Expanded(
-                                        child: Text(""),
-                                      ),
                                       Text("Animation"),
                                       Checkbox(
                                         value: genres.animation,
@@ -364,6 +352,18 @@ class _LoginFormState extends State<RegisterForm> {
                                           });
                                         },
                                       ),
+                                      Expanded(
+                                        child: Text(""),
+                                      ),
+                                      Text("War"),
+                                      Checkbox(
+                                        value: genres.war,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            genres.war = !genres.war;
+                                          });
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -371,7 +371,7 @@ class _LoginFormState extends State<RegisterForm> {
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Row(
                                     children: [
-                                      Text("Thriller   "),
+                                      Text("Thriller      "),
                                       Checkbox(
                                         value: genres.thriller,
                                         onChanged: (value) {
@@ -383,12 +383,12 @@ class _LoginFormState extends State<RegisterForm> {
                                       Expanded(
                                         child: Text(""),
                                       ),
-                                      Text("Romance"),
+                                      Text("Drama"),
                                       Checkbox(
-                                        value: genres.romance,
+                                        value: genres.drama,
                                         onChanged: (value) {
                                           setState(() {
-                                            genres.romance = !genres.romance;
+                                            genres.drama = !genres.drama;
                                           });
                                         },
                                       ),
