@@ -35,65 +35,31 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
                 color: Colors.white)),
       ),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         color: Color(0xFF2d3450),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 7,
-            ),
-            // Container(
-            //   height: MediaQuery.of(context).size.width * 0.4,
-            //   width: MediaQuery.of(context).size.width * 0.35,
-            //   decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(0),
-            //       image: DecorationImage(
-            //           image: widget.cast.profilePath != null
-            //               ? NetworkImage(
-            //                   "https://image.tmdb.org/t/p/w1280${widget.cast.profilePath}",
-            //                 )
-            //               : AssetImage("assets/images/default_poster.jpg"),
-            //           fit: BoxFit.cover),
-            //       color: Colors.white),
-            // ),
-            // TitleOfList("Movie of cast"),
-            Expanded(
-              child: FutureBuilder<Map<String, dynamic>>(
-                  future: this.res_data,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<Future<Movie>> list_movies;
-                      list_movies =
-                          bloc.loadMovies(snapshot.data['movie'].cast<int>());
-                      return GridView.builder(
-                        padding: const EdgeInsets.all(10.0),
-                        itemCount: list_movies.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            child: MovieItem(list_movies[index], "listName"),
-                            onTap: () async {
-                              bloc.movieItemSelected(
-                                  context,
-                                  await list_movies[index],
-                                  "listName",
-                                  widget.user);
-                            },
-                          );
-                        },
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 4 / 5,
-                        ),
-                      );
-                    }
-                    return Center(
-                      child: Text(
-                        "${snapshot.error}",
-                        //style: TextStyle(color: Colors.white),
-                      ),
-                    );
-                  }),
-            ),
-          ],
+        child: FutureBuilder<Map<String, dynamic>>(
+          future: this.res_data,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Future<Movie>> list_movies;
+              list_movies = bloc.loadMovies(snapshot.data['movie'].cast<int>());
+              return ListView.builder(
+                cacheExtent: 0.0,
+                itemCount: list_movies.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: MovieItemForMore(list_movies[index], "listName"),
+                    onTap: () async {
+                      bloc.movieItemSelected(context, await list_movies[index],
+                          "listName", widget.user);
+                    },
+                  );
+                },
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
         ),
       ),
     );

@@ -57,7 +57,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           child: Text(
             "Movie Detail",
             style: TextStyle(
-                fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ),
@@ -215,7 +215,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   ),
                 ],
               ),
-              RelatedMovie(widget._user, widget._movie),
             ],
           ),
         ),

@@ -140,7 +140,7 @@ class HomePageState extends State<HomePageNewUser> {
           child: Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
           ),
         ),
         GestureDetector(
@@ -155,7 +155,7 @@ class HomePageState extends State<HomePageNewUser> {
                   "More",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 20,
                       color: Colors.white),
                 ),
                 Icon(

@@ -37,45 +37,32 @@ class _GenresPageState extends State<GenresPage> {
                 color: Colors.white)),
       ),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         color: Color(0xFF2d3450),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 7,
-            ),
-            Expanded(
-              child: FutureBuilder<Map<String, dynamic>>(
-                  future: this.res_data,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<Future<Movie>> list_movies;
-                      list_movies = bloc.loadMovies(
-                          snapshot.data['recommendations'].cast<int>());
-                      return GridView.builder(
-                        padding: const EdgeInsets.all(10.0),
-                        itemCount: list_movies.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            child: MovieItem(list_movies[index], "listName"),
-                            onTap: () async {
-                              bloc.movieItemSelected(
-                                  context,
-                                  await list_movies[index],
-                                  "listName",
-                                  widget.user);
-                            },
-                          );
-                        },
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 4 / 5,
-                        ),
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  }),
-            ),
-          ],
+        child: FutureBuilder<Map<String, dynamic>>(
+          future: this.res_data,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Future<Movie>> list_movies;
+              list_movies =
+                  bloc.loadMovies(snapshot.data['recommendations'].cast<int>());
+              return ListView.builder(
+                cacheExtent: 0.0,
+                itemCount: list_movies.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: MovieItemForMore(list_movies[index], "listName"),
+                    onTap: () async {
+                      bloc.movieItemSelected(context, await list_movies[index],
+                          "listName", widget.user);
+                    },
+                  );
+                },
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
         ),
       ),
     );

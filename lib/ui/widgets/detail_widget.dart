@@ -9,6 +9,7 @@ import 'package:movie_app/ui/items/cast_crew_widget.dart';
 import 'package:movie_app/models/Movie.dart';
 import 'package:movie_app/repositories/cast_and_crew_repository.dart';
 import 'package:movie_app/ui/screens/genres_page.dart';
+import 'package:movie_app/ui/widgets/related_movie_widget.dart';
 
 class DetailWidget extends StatefulWidget {
   User user;
@@ -25,58 +26,6 @@ class _DetailWidgetState extends State<DetailWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: Color(0xFF2d3450),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 17, right: 5),
-                child: Text(
-                  "Actors",
-                  style: TextStyle(
-                    fontSize: sizeTextHeader,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: BlocProvider(
-                  create: (context) => CastBloc(repository: _castrepository)
-                    ..add(FetchCastAndCrewEvent(movieId: widget.movie.id)),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: BlocBuilder<CastBloc, CastState>(
-                        // ignore: missing_return
-                        builder: (context, state) {
-                          if (state is CastInitialState) {
-                            return CircularProgressIndicator();
-                          } else if (state is CastLoadingState) {
-                            return CircularProgressIndicator();
-                          } else if (state is CastLoadedState) {
-                            return CastScreen(
-                                state.casts.sublist(0, 10), widget.user);
-                          } else if (state is CastErrorState) {
-                            return Center(child: Text("Feild to load !"));
-                          }
-                          return Center(child: Text("Feild to load !"));
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Divider(
-          height: 1,
-        ),
         Expanded(
           child: Container(
             padding: EdgeInsets.only(left: 10),
@@ -87,6 +36,60 @@ class _DetailWidgetState extends State<DetailWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Container(
+                    color: Color(0xFF2d3450),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 17, right: 5),
+                          child: Text(
+                            "Actors",
+                            style: TextStyle(
+                              fontSize: sizeTextHeader,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: BlocProvider(
+                            create: (context) =>
+                                CastBloc(repository: _castrepository)
+                                  ..add(FetchCastAndCrewEvent(
+                                      movieId: widget.movie.id)),
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 100,
+                              width: MediaQuery.of(context).size.width,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: BlocBuilder<CastBloc, CastState>(
+                                  // ignore: missing_return
+                                  builder: (context, state) {
+                                    if (state is CastInitialState) {
+                                      return CircularProgressIndicator();
+                                    } else if (state is CastLoadingState) {
+                                      return CircularProgressIndicator();
+                                    } else if (state is CastLoadedState) {
+                                      return CastScreen(
+                                          state.casts.sublist(0, 10),
+                                          widget.user);
+                                    } else if (state is CastErrorState) {
+                                      return Center(
+                                          child: Text("Feild to load !"));
+                                    }
+                                    return Center(
+                                        child: Text("Feild to load !"));
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   createGenres(widget.movie.genres),
                   createText("Released: ", "${widget.movie.releaseDate}"),
                   createText("Runtime: ",
@@ -115,6 +118,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                       fontSize: 16,
                     ),
                   ),
+                  RelatedMovie(widget.user, widget.movie),
                 ],
               ),
             ),
