@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/blocs/LoginPageBloc.dart';
@@ -9,6 +11,7 @@ import 'package:movie_app/models/Movie.dart';
 import 'package:movie_app/models/User.dart';
 import 'package:movie_app/models/comment.dart';
 import 'package:movie_app/repositories/user_repository_server.dart';
+import 'package:movie_app/utils/input_format.dart';
 import 'package:provider/provider.dart';
 
 class CommentPage extends StatefulWidget {
@@ -55,6 +58,9 @@ class _CommentPageState extends State<CommentPage> {
                   padding: EdgeInsets.only(left: 10),
                   color: colorbackground,
                   child: TextField(
+                    inputFormatters: [
+                      Utf8LengthLimitingTextInputFormatter(120),
+                    ],
                     controller: _contentTextEditing,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
@@ -92,6 +98,8 @@ class _CommentPageState extends State<CommentPage> {
                   child: ListView(
                       scrollDirection: Axis.vertical,
                       children: comments.map((comment) {
+                        List<int> encodeChar = utf8.encode(comment.content);
+
                         return ListTile(
                           leading: FutureBuilder(
                             future: UserRepositoryServer.getUSerById(
@@ -102,9 +110,20 @@ class _CommentPageState extends State<CommentPage> {
                               }
                               if (snapshot.hasData) {
                                 final String nameUser = snapshot.data;
-                                return Text(
-                                  nameUser,
-                                  style: TextStyle(color: Colors.white),
+                                return Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  width: 70,
+                                  child: Center(
+                                    child: Text(
+                                      nameUser,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
                                 );
                               }
                               return Text('');
@@ -115,7 +134,8 @@ class _CommentPageState extends State<CommentPage> {
                             style: TextStyle(color: colorwhite),
                           ),
                           subtitle: Text(
-                            '${comment.content}',
+                            '${utf8.decode(encodeChar)}',
+                            // "asdasdasdasdasdasdasdasdasdasdasdadasdasdasdadad asdaaaaaaaaaaaaaaadsa dasdddddddddddasda",
                             style: TextStyle(color: colorwhite),
                           ),
                         );

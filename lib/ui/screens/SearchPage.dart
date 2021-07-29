@@ -100,7 +100,7 @@ class SearchPage extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     // User user = Provider.of<LoginPageBloc>(context, listen: false).user;
     // TODO: implement buildSuggestions
-    List<Future<Movie>> movies = _bloc.loadMovies([299534, 76600]);
+    List<Future<Movie>> movies = _bloc.loadMovies([299534, 68721]);
     return Container(
       color: Color(0xFF2d3450),
       child: ListView.builder(

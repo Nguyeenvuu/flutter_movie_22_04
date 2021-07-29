@@ -42,7 +42,7 @@ class CommentRepositoryServer {
 
     try {
       http.Response response = await http.get(url);
-      List resData = json.decode(response.body);
+      List resData = json.decode(utf8.decode(response.bodyBytes));
 
       if (response.statusCode == 200) {
         resData.forEach((comment) {

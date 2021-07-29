@@ -22,9 +22,10 @@ class UserInfoPage extends StatelessWidget {
             flex: 2,
             child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/fundo.jpg"),
-                      fit: BoxFit.cover)),
+                image: DecorationImage(
+                    image: AssetImage("assets/images/fundo.jpg"),
+                    fit: BoxFit.cover),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -232,9 +233,14 @@ class UserInfoPage extends StatelessWidget {
   }
 
   List<dynamic> convertGenres(String genres) {
-    List<dynamic> listRedult = genres.split("|");
-
-    return listRedult;
+    List<dynamic> listRedult;
+    try {
+      listRedult = genres.split("|");
+      return listRedult;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   Widget createGenres(List<dynamic> genres) {

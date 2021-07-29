@@ -186,7 +186,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           EdgeInsets.symmetric(horizontal: 4.0),
                                       itemBuilder: (context, _) => Icon(
                                         Icons.star,
-                                        color: Colors.amber,
+                                        color: Colors.yellow,
                                         size: 10,
                                       ),
                                       onRatingUpdate: (_) {},

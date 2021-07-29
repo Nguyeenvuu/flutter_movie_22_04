@@ -31,7 +31,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           content: event.content,
         );
         print(res);
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(seconds: 2));
         List<Comment> comments =
             await repository.listCommentByMovieId(movieId: event.movieId);
         yield CommentLoadedState(comments: comments);

@@ -65,7 +65,7 @@ class _RatingPageState extends State<RatingPage> {
                     spacing: 0.0),
                 IconButton(
                     icon: Icon(Icons.send),
-                    color: Colors.white,
+                    color: Colors.blue,
                     onPressed: () => _addRating(rating.toInt())),
                 Container(
                   height: 300,
@@ -174,7 +174,7 @@ class _RatingPageState extends State<RatingPage> {
                         );
                       }
                       return Container(
-                        child: Text("No have ratign"),
+                        child: Text("No have rating"),
                       );
                     },
                   ),
