@@ -50,6 +50,7 @@ class UserRepositoryServer {
     Map<String, dynamic> resData = json.decode(response.body);
     return resData;
   }
+
   // Đăng ký user mới
   //   Map<String, dynamic> user1 = await UserRepository.register(
   //     userName: 'user_003',
@@ -60,6 +61,35 @@ class UserRepositoryServer {
   //     gender: "Female",
   //     name: "Nguyeen");
   // print('${user1.keys}: ${user1.values}');
+  static Future<Map<String, dynamic>> registerStatic(
+      {String userName,
+      String password,
+      String name,
+      String email,
+      String address,
+      String birthday,
+      String gender,
+      String favorite}) async {
+    http.Response response = await http.post(
+      customerRegisterUrl,
+      headers: <String, String>{'Content-Type': 'application/json'},
+      body: jsonEncode(
+        <String, String>{
+          'user_name': userName,
+          'password': password,
+          'name': name,
+          'email': email,
+          'adress': address,
+          'birthday': birthday,
+          'gender': gender,
+          'favorite_genres': favorite
+        },
+      ),
+    );
+
+    Map<String, dynamic> resData = json.decode(response.body);
+    return resData;
+  }
 
 //===============================================================
   static Future<String> getUSerById({int userId}) async {

@@ -152,16 +152,10 @@ class LoginPageState extends State<LoginPage> {
                             children: <Widget>[
                               Flexible(
                                 flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    "Forgot Password?",
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 15),
-                                  ),
-                                ),
+                                child: Center(child: Container()),
                               ),
                               Flexible(
-                                flex: 1,
+                                flex: 2,
                                 child: SizedBox.expand(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -199,7 +193,11 @@ class LoginPageState extends State<LoginPage> {
                                     },
                                   ),
                                 ),
-                              )
+                              ),
+                              Flexible(
+                                flex: 1,
+                                child: Center(child: Container()),
+                              ),
                             ],
                           ),
                         )

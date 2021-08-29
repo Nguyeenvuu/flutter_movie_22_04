@@ -122,7 +122,7 @@ class _LoginFormState extends State<RegisterForm> {
             ..removeCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                duration: Duration(seconds: 8),
+                duration: Duration(seconds: 3),
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
