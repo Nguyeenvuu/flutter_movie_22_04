@@ -38,6 +38,8 @@ class DrawerNavigationBloc {
         return getHomePage();
       case 1:
         return getUserInfoPage();
+      default:
+        return Container();
     }
   }
 
@@ -47,6 +49,8 @@ class DrawerNavigationBloc {
         return new HomePageNewUser(user: _user);
       case 1:
         return getUserInfoPage();
+       default:
+        return Container();
     }
   }
 

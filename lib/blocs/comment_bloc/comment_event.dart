@@ -11,7 +11,7 @@ class FetchCommentEvent extends CommentEvent {
   FetchCommentEvent({@required this.movieId});
 
   @override
-  // TODO: implement props
+  
   List<Object> get props => [query];
 }
 

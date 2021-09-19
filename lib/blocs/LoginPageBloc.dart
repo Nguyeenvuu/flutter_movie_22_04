@@ -14,14 +14,14 @@ class LoginPageBloc with ChangeNotifier {
   }
 
   Future btnLoginPress(BuildContext context) async {
-    Map<String, dynamic> res_data =
+    Map<String, dynamic> resdata =
         await UserApiClient.Login(userController.text, passController.text);
-    _user = User.fromJson(res_data);
+    _user = User.fromJson(resdata);
     print(user.name);
     print(user.userId);
-    if (res_data['Sign In Success']) {
+    if (resdata['Sign In Success']) {
 //      Navigator.of(context).pop();
-      if (res_data["user_id"] <= 270896) {
+      if (resdata["user_id"] <= 270896) {
         Navigator.of(context).pushReplacementNamed(
           "/DrawerNavigation",
           arguments: _user,
@@ -52,7 +52,7 @@ class LoginPageBloc with ChangeNotifier {
               ),
               content: Text("You entered the wrong username or password."),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   child: Text(
                     "OK",
                     style: TextStyle(fontSize: 15, color: Colors.blue),

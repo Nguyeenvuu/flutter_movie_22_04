@@ -39,15 +39,14 @@ class User extends Equatable {
     data['address'] = this.adress;
     data['birthday'] = this.birthday;
     data['gender'] = this.gender;
+    return data;
   }
 
   @override
-  // TODO: implement props
   List<Object> get props => [userId, email];
 
   @override
   String toString() {
-    // TODO: implement toString
     return "username: ${this.userName}, email: ${this.email}";
   }
 }

@@ -23,8 +23,8 @@ class HomePageBloc {
             builder: (context) => MovieDetailPage(movie, listName, user)));
   }
 
-  List<Future<Movie>> loadMovies(List<int> list_id) {
-    return MovieApiClient.loadMovies(list_id);
+  List<Future<Movie>> loadMovies(List<int> listid) {
+    return MovieApiClient.loadMovies(listid);
   }
 
   Future<Map<String, dynamic>> loadRecommendedMovies(int userId) async {

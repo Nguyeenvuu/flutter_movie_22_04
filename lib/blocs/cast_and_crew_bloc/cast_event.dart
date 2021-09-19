@@ -10,6 +10,5 @@ class FetchCastAndCrewEvent extends CastEvent {
   FetchCastAndCrewEvent({@required this.movieId});
 
   @override
-  // TODO: implement props
   List<Object> get props => [query];
 }

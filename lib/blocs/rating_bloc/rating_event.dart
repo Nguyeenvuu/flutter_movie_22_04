@@ -11,7 +11,6 @@ class FetchRatingEvent extends RatingEvent {
   FetchRatingEvent({@required this.movieId});
 
   @override
-  // TODO: implement props
   List<Object> get props => [query];
 }
 

@@ -10,13 +10,11 @@ class CastBloc extends Bloc<CastEvent, CastState> {
 
   CastBloc({@required this.repository}) : super(null);
 
-  @override
-  // TODO: implement initialState
   CastState get initialState => CastInitialState();
 
   @override
   Stream<CastState> mapEventToState(CastEvent event) async* {
-    // TODO: implement mapEventToState
+
 
     if (event is FetchCastAndCrewEvent) {
       yield CastLoadingState();

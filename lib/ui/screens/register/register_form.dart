@@ -36,7 +36,7 @@ class _LoginFormState extends State<RegisterForm> {
     music: false,
     mystery: false,
     romance: false,
-    science_fiction: false,
+    sciencefiction: false,
     thriller: false,
     war: false,
     western: false,
@@ -51,7 +51,7 @@ class _LoginFormState extends State<RegisterForm> {
     return state.isFormValid && isPopulated && !state.isSubmitting;
   }
 
-  String _getFavorite() {}
+
   RegisterBloc _registerBloc;
 
   @override

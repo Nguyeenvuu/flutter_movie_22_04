@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/blocs/MovieDetailPageBloc.dart';
 import 'package:movie_app/blocs/rating_bloc/rating_bloc.dart';
 import 'package:movie_app/blocs/rating_bloc/rating_event.dart';
 import 'package:movie_app/blocs/rating_bloc/rating_state.dart';
@@ -102,7 +101,7 @@ class _RatingPageState extends State<RatingPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '${state.sum_ratings['5']}',
+                                  '${state.sumratings['5']}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
@@ -117,7 +116,7 @@ class _RatingPageState extends State<RatingPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '${state.sum_ratings['4']}',
+                                  '${state.sumratings['4']}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
@@ -132,7 +131,7 @@ class _RatingPageState extends State<RatingPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '${state.sum_ratings['3']}',
+                                  '${state.sumratings['3']}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
@@ -147,7 +146,7 @@ class _RatingPageState extends State<RatingPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '${state.sum_ratings['2']}',
+                                  '${state.sumratings['2']}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
@@ -162,7 +161,7 @@ class _RatingPageState extends State<RatingPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '${state.sum_ratings['1']}',
+                                  '${state.sumratings['1']}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,

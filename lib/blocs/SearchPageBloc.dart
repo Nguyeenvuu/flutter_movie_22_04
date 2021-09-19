@@ -12,7 +12,7 @@ import 'package:movie_app/utils/url_base.dart';
 class SearchPageBloc {
   Future<List<int>> searchMovies(String title) async {
     var response = await http.get(movieSearchOnlineUrl(title));
-    List<int> result = List<int>();
+    List<int> result = [];
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
 
@@ -28,8 +28,8 @@ class SearchPageBloc {
     }
   }
 
-  List<Future<Movie>> loadMovies(List<int> list_id) {
-    return MovieApiClient.loadMovies(list_id);
+  List<Future<Movie>> loadMovies(List<int> listid) {
+    return MovieApiClient.loadMovies(listid);
   }
 
   void movieItemSelected(

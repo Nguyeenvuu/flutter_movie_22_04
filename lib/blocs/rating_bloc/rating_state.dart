@@ -14,9 +14,9 @@ class RatingLoadingState extends RatingState {
 }
 
 class RatingLoadedState extends RatingState {
-  final Map<String, dynamic> sum_ratings;
-  RatingLoadedState({@required this.sum_ratings});
-  get sumRatings => sum_ratings;
+  final Map<String, dynamic> sumratings;
+  RatingLoadedState({@required this.sumratings});
+  get sumRatings => sumratings;
 
   @override
   List<Object> get props => null;

@@ -60,7 +60,7 @@ class CastAndCrew {
     //belongsToCollection = json['belongs_to_collection'];
     budget = json['budget'];
     if (json['genres'] != null) {
-      genres = new List<Genres>();
+      genres = [];
       json['genres'].forEach((v) {
         genres.add(new Genres.fromJson(v));
       });
@@ -74,13 +74,13 @@ class CastAndCrew {
     popularity = json['popularity'];
     posterPath = json['poster_path'];
     if (json['production_companies'] != null) {
-      productionCompanies = new List<ProductionCompanies>();
+      productionCompanies = [];
       json['production_companies'].forEach((v) {
         productionCompanies.add(new ProductionCompanies.fromJson(v));
       });
     }
     if (json['production_countries'] != null) {
-      productionCountries = new List<ProductionCountries>();
+      productionCountries = [];
       json['production_countries'].forEach((v) {
         productionCountries.add(new ProductionCountries.fromJson(v));
       });
@@ -89,7 +89,7 @@ class CastAndCrew {
     revenue = json['revenue'];
     runtime = json['runtime'];
     if (json['spoken_languages'] != null) {
-      spokenLanguages = new List<SpokenLanguages>();
+      spokenLanguages = [];
       json['spoken_languages'].forEach((v) {
         spokenLanguages.add(new SpokenLanguages.fromJson(v));
       });
@@ -239,13 +239,13 @@ class Credits {
 
   Credits.fromJson(Map<String, dynamic> json) {
     if (json['cast'] != null) {
-      cast = new List<Cast>();
+      cast = [];
       json['cast'].forEach((v) {
         cast.add(new Cast.fromJson(v));
       });
     }
     if (json['crew'] != null) {
-      crew = new List<Crew>();
+      crew = [];
       json['crew'].forEach((v) {
         crew.add(new Crew.fromJson(v));
       });

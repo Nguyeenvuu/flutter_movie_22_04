@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:movie_app/blocs/rating_bloc/rating_event.dart';
 import 'package:movie_app/blocs/rating_bloc/rating_state.dart';
-import 'package:movie_app/models/rating.dart';
+
 import 'package:movie_app/repositories/rating_repository_server.dart';
 
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
@@ -13,14 +13,12 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
 
   @override
   Stream<RatingState> mapEventToState(RatingEvent event) async* {
-    // TODO: implement mapEventToState
-
     if (event is FetchRatingEvent) {
       yield RatingLoadingState();
       try {
         Map<String, dynamic> sumRatings =
             await repository.listRatingByMovieId(event.movieId);
-        yield RatingLoadedState(sum_ratings: sumRatings);
+        yield RatingLoadedState(sumratings: sumRatings);
       } catch (e) {
         yield RatingErrorState(message: e.toString());
       }
@@ -44,7 +42,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
           Map<String, dynamic> sumRatings =
               await repository.listRatingByMovieId('${event.movieId}');
 
-          yield RatingLoadedState(sum_ratings: sumRatings);
+          yield RatingLoadedState(sumratings: sumRatings);
         }
       } catch (e) {
         yield RatingErrorState(message: e.toString());

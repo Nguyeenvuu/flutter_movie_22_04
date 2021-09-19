@@ -11,7 +11,7 @@ class ApiResultModel {
     totalResults = json['total_results'];
     totalPages = json['total_pages'];
     if (json['results'] != null) {
-      results = new List<Results>();
+      results = [];
       json['results'].forEach((v) {
         results.add(new Results.fromJson(v));
       });

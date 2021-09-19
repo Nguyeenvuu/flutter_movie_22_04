@@ -47,7 +47,7 @@ class Genre {
   bool music = false;
   bool mystery = false;
   bool romance = false;
-  bool science_fiction = false;
+  bool sciencefiction = false;
   bool thriller = false;
   bool war = false;
   bool western = false;
@@ -66,7 +66,7 @@ class Genre {
       this.music,
       this.mystery,
       this.romance,
-      this.science_fiction,
+      this.sciencefiction,
       this.thriller,
       this.war,
       this.western});
